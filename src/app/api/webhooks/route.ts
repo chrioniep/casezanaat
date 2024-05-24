@@ -37,7 +37,7 @@ export async function POST(req: Request) {
       const billingAddress = session.customer_details!.address;
       const shippingAddress = session.shipping_details!.address;
 
-      await db.order.update({
+      const updatedOrder = await db.order.update({
         where: {
           id: orderId,
         },
@@ -45,22 +45,22 @@ export async function POST(req: Request) {
           isPaid: true,
           shippingAddress: {
             create: {
-              name: session.customer_details?.name!,
+              name: session.customer_details!.name!,
               city: shippingAddress!.city!,
               country: shippingAddress!.country!,
+              postalCode: shippingAddress!.postal_code!,
+              street: shippingAddress!.line1!,
               state: shippingAddress!.state!,
-              postalCode: shippingAddress?.postal_code,
-              street: shippingAddress?.line1!,
             },
           },
           billingAddress: {
             create: {
-              name: session.customer_details?.name!,
+              name: session.customer_details!.name!,
               city: billingAddress!.city!,
               country: billingAddress!.country!,
+              postalCode: billingAddress!.postal_code!,
+              street: billingAddress!.line1!,
               state: billingAddress!.state!,
-              postalCode: billingAddress?.postal_code,
-              street: billingAddress?.line1!,
             },
           },
         },
