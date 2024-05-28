@@ -18,7 +18,7 @@ export function constructMetadata({
   title = "CaseZanaat - custom high-quality phone cases",
   description = "Create custom high-quality phone cases in second",
   image = "/thumbail.png",
-  icons = "/favicon.png",
+  icons = "/favicon.ico",
 }: {
   title?: string;
   description?: string;
